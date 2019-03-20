@@ -1,0 +1,56 @@
+-- Table: ad_tab
+
+-- DROP TABLE ad_tab;
+
+CREATE TABLE ad_tab
+(
+  ad_tab_id                                                 DECIMAL(10,0) NOT NULL,
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  isactive                                                  CHAR(1) NOT NULL DEFAULT 'Y',
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  name                                                      VARCHAR(60) NOT NULL,
+  description                    FOR COLUMN desc            VARCHAR(255),
+  help                                                      VARCHAR(2000),
+  ad_table_id                    FOR COLUMN ad_tid          DECIMAL(10,0) NOT NULL,
+  ad_window_id                   FOR COLUMN ad_winid        DECIMAL(10,0) NOT NULL,
+  seqno                                                     DECIMAL(10,0) NOT NULL,
+  tablevel                                                  DECIMAL(10,0) NOT NULL,
+  issinglerow                    FOR COLUMN issglrow        CHAR(1) NOT NULL DEFAULT 'Y',
+  isinfotab                                                 CHAR(1) DEFAULT 'N',
+  istranslationtab               FOR COLUMN istrntbl        CHAR(1) NOT NULL DEFAULT 'N',
+  isreadonly                                                CHAR(1) NOT NULL DEFAULT 'N',
+  ad_column_id                   FOR COLUMN ad_colid        DECIMAL(10,0),
+  hastree                                                   CHAR(1) NOT NULL DEFAULT 'N',
+  whereclause                    FOR COLUMN whrclse         VARCHAR(2000),
+  orderbyclause                  FOR COLUMN obclse          VARCHAR(2000),
+  commitwarning                  FOR COLUMN cmtwrn          VARCHAR(2000),
+  ad_process_id                  FOR COLUMN ad_pid          DECIMAL(10,0),
+  processing                                                CHAR(1),
+  ad_image_id                    FOR COLUMN ad_imgid        DECIMAL(10,0),
+  importfields                   FOR COLUMN impflds         CHAR(1),
+  ad_columnsortorder_id          FOR COLUMN ad_csoid        DECIMAL(10,0),
+  ad_columnsortyesno_id          FOR COLUMN ad_csynid       DECIMAL(10,0),
+  issorttab                                                 CHAR(1) NOT NULL DEFAULT 'N',
+  entitytype                                                VARCHAR(40) NOT NULL DEFAULT 'D',
+  included_tab_id                FOR COLUMN inctabid        DECIMAL(10,0),
+  readonlylogic                  FOR COLUMN rol             VARCHAR(2000),
+  displaylogic                   FOR COLUMN dsplgc          VARCHAR(2000),
+  isinsertrecord                 FOR COLUMN isinsrec        CHAR(1) NOT NULL DEFAULT 'Y',
+  isadvancedtab                  FOR COLUMN isadvtab        CHAR(1) NOT NULL DEFAULT 'N',
+  parent_column_id               FOR COLUMN parent_cid      DECIMAL(10,0),
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  ad_contextinfo_id              FOR COLUMN ad_ctxid        DECIMAL(10,0),
+  CONSTRAINT ad_tab_pkey PRIMARY KEY (ad_tab_id),
+  CONSTRAINT ad_tab_hastree_check CHECK (hastree in ('Y','N')),
+  CONSTRAINT ad_tab_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT ad_tab_isinfotab_check CHECK (isinfotab in ('Y','N')),
+  CONSTRAINT ad_tab_isreadonly_check CHECK (isreadonly in ('Y','N')),
+  CONSTRAINT ad_tab_issinglerow_check CHECK (issinglerow in ('Y','N')),
+  CONSTRAINT ad_tab_istranslationtab_check CHECK (istranslationtab in ('Y','N'))
+)
+;
+

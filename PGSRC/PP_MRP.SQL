@@ -1,0 +1,56 @@
+-- Table: pp_mrp
+
+-- DROP TABLE pp_mrp;
+
+CREATE TABLE pp_mrp
+(
+  name                                                      VARCHAR(120),
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  c_bpartner_id                  FOR COLUMN c_bpid          DECIMAL(10,0),
+  c_orderline_id                 FOR COLUMN c_olid          DECIMAL(10,0),
+  c_order_id                                                DECIMAL(10,0),
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  dateconfirm                    FOR COLUMN dtecfm          TIMESTAMP,
+  datefinishschedule             FOR COLUMN dtefinscd       TIMESTAMP,
+  dateordered                    FOR COLUMN datord          TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  datepromised                   FOR COLUMN datprm          TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  datesimulation                 FOR COLUMN dtesim          TIMESTAMP,
+  datestart                                                 TIMESTAMP,
+  datestartschedule              FOR COLUMN dtestrscd       TIMESTAMP,
+  description                    FOR COLUMN desc            VARCHAR(1020),
+  docstatus                                                 VARCHAR(2),
+  isactive                                                  CHAR(1) NOT NULL,
+  isavailable                    FOR COLUMN isavail         CHAR(1),
+  m_forecastline_id              FOR COLUMN m_flid          DECIMAL(10,0),
+  m_forecast_id                  FOR COLUMN m_fid           DECIMAL(10,0),
+  m_product_id                   FOR COLUMN m_pid           DECIMAL(10,0),
+  m_requisitionline_id           FOR COLUMN m_rlid          DECIMAL(10,0),
+  m_requisition_id               FOR COLUMN m_rid           DECIMAL(10,0),
+  m_warehouse_id                 FOR COLUMN m_wid           DECIMAL(10,0) NOT NULL,
+  pp_mrp_id                                                 DECIMAL(10,0) NOT NULL,
+  pp_order_bomline_id            FOR COLUMN pp_obomlid      DECIMAL(10,0),
+  pp_order_id                    FOR COLUMN pp_ordid        DECIMAL(10,0),
+  planner_id                                                DECIMAL(10,0),
+  priority                                                  VARCHAR(10),
+  qty                                                       DECFLOAT(16),
+  s_resource_id                  FOR COLUMN s_rid           DECIMAL(10,0),
+  ordertype                                                 VARCHAR(3),
+  typemrp                                                   CHAR(1),
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  value                                                     VARCHAR(80) NOT NULL,
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  version                                                   DECFLOAT(16),
+  dd_order_id                    FOR COLUMN dd_ordid        DECIMAL(10,0),
+  dd_orderline_id                FOR COLUMN dd_ordlid       DECIMAL(10,0),
+  c_project_id                   FOR COLUMN c_prjid         DECIMAL(10,0),
+  c_projectphase_id              FOR COLUMN c_prjpid        DECIMAL(10,0),
+  c_projecttask_id               FOR COLUMN c_prjtskid      DECIMAL(10,0),
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  CONSTRAINT pp_mrp_pkey PRIMARY KEY (pp_mrp_id),
+  CONSTRAINT pp_mrp_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT pp_mrp_isavailable_check CHECK (isavailable in ('Y','N'))
+)
+;
+

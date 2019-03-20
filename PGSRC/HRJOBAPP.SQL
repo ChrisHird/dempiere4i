@@ -1,0 +1,58 @@
+-- Table: hr_jobapplication
+
+-- DROP TABLE hr_jobapplication;
+
+CREATE TABLE hr_jobapplication FOR SYSTEM NAME hrjobapp
+(
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  isactive                                                  CHAR(1) NOT NULL DEFAULT 'Y',
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  hr_jobapplication_id           FOR COLUMN hr_jobapid      DECIMAL(10,0) NOT NULL,
+  firstname                                                 VARCHAR(50) NOT NULL,
+  middlename                                                VARCHAR(50),
+  lastname                                                  VARCHAR(50),
+  fathername                                                VARCHAR(50) DEFAULT NULL,
+  email                                                     VARCHAR(50) DEFAULT NULL,
+  phone2                                                    VARCHAR(10) NOT NULL,
+  highesteducation               FOR COLUMN highedu         VARCHAR(50) NOT NULL,
+  city                                                      VARCHAR(50) DEFAULT NULL,
+  company                                                   VARCHAR(50) DEFAULT NULL,
+  yearofpassing                  FOR COLUMN yropass         VARCHAR(4) NOT NULL,
+  totalrelevantexperience        FOR COLUMN totrelexp       VARCHAR(10) DEFAULT NULL,
+  identityproof                  FOR COLUMN idproof         VARCHAR(50) NOT NULL,
+  identityproofno                FOR COLUMN idproofno       VARCHAR(20) NOT NULL,
+  status                                                    VARCHAR(50) DEFAULT 'Applied',
+  comments                                                  VARCHAR(2000) DEFAULT NULL,
+  isselected                                                CHAR(1) DEFAULT NULL,
+  c_bpartner_id                  FOR COLUMN c_bpid          DECIMAL(10,0),
+  ref_bpartner_id                FOR COLUMN ref_bpid        DECIMAL(10,0),
+  isinterviewover                FOR COLUMN isiviewo        CHAR(1) DEFAULT NULL,
+  applicantsno                   FOR COLUMN aplno           VARCHAR(10) DEFAULT NULL,
+  c_location_id                  FOR COLUMN c_lid           DECIMAL(10,0),
+  hr_designation_id              FOR COLUMN hr_desid        DECIMAL(10,0),
+  jobapplicationdate             FOR COLUMN jobappdte       TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  hr_jobopening_id               FOR COLUMN hr_jobopid      DECIMAL(10,0) NOT NULL,
+  processed                                                 CHAR(1) NOT NULL,
+  recruitedemployee_id           FOR COLUMN rctdempid       DECIMAL(10,0),
+  phone                                                     VARCHAR(40) NOT NULL,
+  isformeremployee               FOR COLUMN isfmremp        CHAR(1) DEFAULT NULL,
+  terminationdate                FOR COLUMN termdte         TIMESTAMP,
+  startdate                                                 TIMESTAMP,
+  iswillingtorelocate            FOR COLUMN iswilreloc      CHAR(1) DEFAULT NULL,
+  iswillingtotravel              FOR COLUMN iswiltrv        CHAR(1) DEFAULT NULL,
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  CONSTRAINT hr_jobapplication_key PRIMARY KEY (hr_jobapplication_id),
+  CONSTRAINT hr_jobapplication_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT hr_jobapplication_isformeremployee_check CHECK (isformeremployee in ('Y','N')),
+  CONSTRAINT hr_jobapplication_isinterviewover_check CHECK (isinterviewover in ('Y','N')),
+  CONSTRAINT hr_jobapplication_isselected_check CHECK (isselected in ('Y','N')),
+  CONSTRAINT hr_jobapplication_iswillingtorelocate_check CHECK (iswillingtorelocate in ('Y','N')),
+  CONSTRAINT hr_jobapplication_iswillingtotravel_check CHECK (iswillingtotravel in ('Y','N')),
+  CONSTRAINT hr_jobapplication_processed_check CHECK (processed in ('Y','N'))
+)
+;
+

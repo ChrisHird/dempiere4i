@@ -1,0 +1,55 @@
+-- Table: s_timeexpenseline
+
+-- DROP TABLE s_timeexpenseline;
+
+CREATE TABLE s_timeexpenseline FOR SYSTEM NAME stimexpln
+(
+  s_timeexpenseline_id           FOR COLUMN s_telid         DECIMAL(10,0) NOT NULL,
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  isactive                                                  CHAR(1) NOT NULL DEFAULT 'Y',
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  s_timeexpense_id               FOR COLUMN s_teid          DECIMAL(10,0) NOT NULL,
+  line                                                      DECIMAL(10,0) NOT NULL,
+  istimereport                   FOR COLUMN istimrpt        CHAR(1) NOT NULL DEFAULT 'N',
+  dateexpense                    FOR COLUMN datexp          TIMESTAMP,
+  m_product_id                   FOR COLUMN m_pid           DECIMAL(10,0),
+  qty                                                       DECFLOAT(16) DEFAULT 0,
+  expenseamt                                                DECFLOAT(16) DEFAULT 0,
+  c_currency_id                  FOR COLUMN c_cuid          DECIMAL(10,0),
+  convertedamt                   FOR COLUMN cvtamt          DECFLOAT(16) DEFAULT 0,
+  s_resourceassignment_id        FOR COLUMN s_raid          DECIMAL(10,0),
+  description                    FOR COLUMN desc            VARCHAR(255),
+  note                                                      VARCHAR(255),
+  isinvoiced                                                CHAR(1) NOT NULL DEFAULT 'N',
+  c_bpartner_id                  FOR COLUMN c_bpid          DECIMAL(10,0),
+  c_project_id                   FOR COLUMN c_prjid         DECIMAL(10,0),
+  c_activity_id                  FOR COLUMN c_aid           DECIMAL(10,0),
+  c_campaign_id                  FOR COLUMN c_camid         DECIMAL(10,0),
+  c_invoiceline_id               FOR COLUMN c_ilid          DECIMAL(10,0),
+  invoiceprice                   FOR COLUMN invprc          DECFLOAT(16) DEFAULT 0,
+  c_uom_id                                                  DECIMAL(10,0),
+  c_orderline_id                 FOR COLUMN c_olid          DECIMAL(10,0),
+  c_projectphase_id              FOR COLUMN c_prjpid        DECIMAL(10,0),
+  c_projecttask_id               FOR COLUMN c_prjtskid      DECIMAL(10,0),
+  s_timetype_id                  FOR COLUMN s_ttid          DECIMAL(10,0),
+  processed                                                 CHAR(1) NOT NULL DEFAULT 'N',
+  qtyinvoiced                    FOR COLUMN qtyinv          DECFLOAT(16),
+  qtyreimbursed                  FOR COLUMN qtyrebd         DECFLOAT(16),
+  priceinvoiced                  FOR COLUMN prcinv          DECFLOAT(16),
+  pricereimbursed                FOR COLUMN prcrebd         DECFLOAT(16),
+  c_tax_id                                                  DECIMAL(10,0),
+  linenetamt                                                DECFLOAT(16),
+  linetotalamt                   FOR COLUMN lintamt         DECFLOAT(16),
+  taxamt                                                    DECFLOAT(16),
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  CONSTRAINT s_timeexpenseline_pkey PRIMARY KEY (s_timeexpenseline_id),
+  CONSTRAINT s_timeexpenseline_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT s_timeexpenseline_isinvoiced_check CHECK (isinvoiced in ('Y','N')),
+  CONSTRAINT s_timeexpenseline_istimereport_check CHECK (istimereport in ('Y','N'))
+)
+;
+

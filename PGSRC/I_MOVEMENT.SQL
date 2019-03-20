@@ -1,0 +1,57 @@
+-- Table: i_movement
+
+-- DROP TABLE i_movement;
+
+CREATE TABLE i_movement
+(
+  i_movement_id                  FOR COLUMN i_movid         DECIMAL(10,0) NOT NULL,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  isactive                                                  CHAR(1) NOT NULL,
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  processed                                                 CHAR(1) NOT NULL DEFAULT 'N',
+  i_isimported                   FOR COLUMN i_ii            CHAR(1) NOT NULL DEFAULT 'N',
+  processing                                                CHAR(1) NOT NULL DEFAULT 'N',
+  i_errormsg                                                VARCHAR(2000),
+  productvalue                   FOR COLUMN prodval         VARCHAR(40),
+  m_product_id                   FOR COLUMN m_pid           DECIMAL(10,0),
+  movementdate                   FOR COLUMN movdat          TIMESTAMP,
+  m_locator_id                   FOR COLUMN m_lid           DECIMAL(10,0),
+  locatorvalue                   FOR COLUMN locval          VARCHAR(40),
+  m_locatorto_id                 FOR COLUMN m_ltid          DECIMAL(10,0),
+  locatortovalue                 FOR COLUMN loctoval        VARCHAR(40),
+  orgvalue                                                  VARCHAR(40),
+  movementqty                    FOR COLUMN movqty          DECFLOAT(16),
+  documentno                                                VARCHAR(40) NOT NULL,
+  c_doctype_id                   FOR COLUMN c_dtid          DECIMAL(10,0),
+  doctypename                    FOR COLUMN doctypnam       VARCHAR(40),
+  c_bpartner_id                  FOR COLUMN c_bpid          DECIMAL(10,0),
+  bpartnervalue                  FOR COLUMN bpvalue         VARCHAR(40),
+  m_shipper_id                   FOR COLUMN m_sid           DECIMAL(10,0),
+  shippername                    FOR COLUMN shpname         VARCHAR(40),
+  ad_user_id                                                DECIMAL(10,0),
+  deliveryviarule                FOR COLUMN dlyvrule        VARCHAR(40),
+  deliveryrule                   FOR COLUMN dlyrule         VARCHAR(40),
+  priorityrule                   FOR COLUMN ptyrule         VARCHAR(40),
+  freightcostrule                FOR COLUMN fcrule          VARCHAR(40),
+  c_project_id                   FOR COLUMN c_prjid         DECIMAL(10,0),
+  projectvalue                   FOR COLUMN prjval          VARCHAR(40),
+  c_campaign_id                  FOR COLUMN c_camid         DECIMAL(10,0),
+  campaignvalue                  FOR COLUMN campval         VARCHAR(40),
+  ad_orgtrx_id                   FOR COLUMN ad_otid         DECIMAL(10,0),
+  orgtrxvalue                    FOR COLUMN orgtrxval       VARCHAR(40),
+  user1_id                                                  VARCHAR(10),
+  user2_id                                                  VARCHAR(10),
+  m_movement_id                  FOR COLUMN m_mid           DECIMAL(10,0),
+  m_movementline_id              FOR COLUMN m_mlid          DECIMAL(10,0),
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  CONSTRAINT i_movement_pkey PRIMARY KEY (i_movement_id),
+  CONSTRAINT i_movement_i_isimported_check CHECK (i_isimported in ('Y','N')),
+  CONSTRAINT i_movement_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT i_movement_processed_check CHECK (processed in ('Y','N'))
+)
+;
+

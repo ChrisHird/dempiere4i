@@ -1,0 +1,55 @@
+-- Table: c_rfq
+
+-- DROP TABLE c_rfq;
+
+CREATE TABLE c_rfq
+(
+  c_rfq_id                                                  DECIMAL(10,0) NOT NULL,
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  isactive                                                  CHAR(1) NOT NULL DEFAULT 'Y',
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  name                                                      VARCHAR(60) NOT NULL,
+  description                    FOR COLUMN desc            VARCHAR(255),
+  help                                                      VARCHAR(2000),
+  c_rfq_topic_id                 FOR COLUMN c_rqtid         DECIMAL(10,0) NOT NULL,
+  c_currency_id                  FOR COLUMN c_cuid          DECIMAL(10,0) NOT NULL,
+  dateresponse                   FOR COLUMN datrsp           TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  isrfqresponseaccepted          FOR COLUMN isrfqract       CHAR(1) NOT NULL DEFAULT 'Y',
+  dateworkstart                  FOR COLUMN datwrks         TIMESTAMP,
+  deliverydays                   FOR COLUMN deldays         DECIMAL(10,0) DEFAULT 0,
+  dateworkcomplete               FOR COLUMN datwrkc         TIMESTAMP,
+  quotetype                                                 CHAR(1) NOT NULL,
+  isquotetotalamt                FOR COLUMN isqtamt         CHAR(1) NOT NULL DEFAULT 'N',
+  isquoteallqty                  FOR COLUMN isqallqty       CHAR(1) NOT NULL DEFAULT 'Y',
+  isselfservice                  FOR COLUMN isslfsrv        CHAR(1) NOT NULL DEFAULT 'N',
+  isinvitedvendorsonly           FOR COLUMN isinvtvo        CHAR(1) NOT NULL DEFAULT 'N',
+  c_bpartner_id                  FOR COLUMN c_bpid          DECIMAL(10,0),
+  c_bpartner_location_id         FOR COLUMN c_bplid         DECIMAL(10,0),
+  ad_user_id                                                DECIMAL(10,0),
+  salesrep_id                    FOR COLUMN slsrepid        DECIMAL(10,0) NOT NULL,
+  margin                                                    DECFLOAT(16),
+  createso                                                  CHAR(1),
+  createpo                                                  CHAR(1),
+  publishrfq                                                CHAR(1),
+  c_order_id                                                DECIMAL(10,0),
+  copylines                                                 CHAR(1),
+  rankrfq                                                   CHAR(1),
+  processing                                                CHAR(1),
+  processed                                                 CHAR(1) NOT NULL DEFAULT 'N',
+  documentno                                                VARCHAR(30) NOT NULL DEFAULT '.',
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  CONSTRAINT c_rfq_pkey PRIMARY KEY (c_rfq_id),
+  CONSTRAINT c_rfq_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT c_rfq_isinvitedvendorsonly_check CHECK (isinvitedvendorsonly in ('Y','N')),
+  CONSTRAINT c_rfq_isquoteallqty_check CHECK (isquoteallqty in ('Y','N')),
+  CONSTRAINT c_rfq_isquotetotalamt_check CHECK (isquotetotalamt in ('Y','N')),
+  CONSTRAINT c_rfq_isrfqresponseaccepted_check CHECK (isrfqresponseaccepted in ('Y','N')),
+  CONSTRAINT c_rfq_isselfservice_check CHECK (isselfservice in ('Y','N')),
+  CONSTRAINT c_rfq_processed_check CHECK (processed in ('Y','N'))
+)
+;
+

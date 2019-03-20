@@ -1,0 +1,57 @@
+-- Table: r_requestaction
+
+-- DROP TABLE r_requestaction;
+
+CREATE TABLE r_requestaction FOR SYSTEM NAME rreqa
+(
+  r_requestaction_id             FOR COLUMN r_raid          DECIMAL(10,0) NOT NULL,
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  isactive                                                  CHAR(1) NOT NULL DEFAULT 'Y',
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  r_request_id                   FOR COLUMN r_rid           DECIMAL(10,0) NOT NULL,
+  r_group_id                                                DECIMAL(10,0),
+  r_category_id                  FOR COLUMN r_catid         DECIMAL(10,0),
+  r_status_id                    FOR COLUMN r_stsid         DECIMAL(10,0),
+  r_resolution_id                FOR COLUMN r_rslnid        DECIMAL(10,0),
+  salesrep_id                    FOR COLUMN slsrepid        DECIMAL(10,0),
+  ad_role_id                                                DECIMAL(10,0),
+  isescalated                    FOR COLUMN isescal         CHAR(1),
+  isinvoiced                                                CHAR(1),
+  confidentialtype               FOR COLUMN conftype        CHAR(1),
+  isselfservice                  FOR COLUMN isslfsrv        CHAR(1),
+  priority                                                  CHAR(1),
+  priorityuser                   FOR COLUMN ptyuser         CHAR(1),
+  c_bpartner_id                  FOR COLUMN c_bpid          DECIMAL(10,0),
+  ad_user_id                                                DECIMAL(10,0),
+  c_order_id                                                DECIMAL(10,0),
+  c_invoice_id                   FOR COLUMN c_iid           DECIMAL(10,0),
+  c_payment_id                   FOR COLUMN c_payid         DECIMAL(10,0),
+  m_product_id                   FOR COLUMN m_pid           DECIMAL(10,0),
+  c_project_id                   FOR COLUMN c_prjid         DECIMAL(10,0),
+  summary                                                   VARCHAR(2000),
+  datenextaction                 FOR COLUMN datnxta         TIMESTAMP,
+  c_activity_id                  FOR COLUMN c_aid           DECIMAL(10,0),
+  r_requesttype_id               FOR COLUMN r_rtid          DECIMAL(10,0),
+  a_asset_id                                                DECIMAL(10,0),
+  m_inout_id                                                DECIMAL(10,0),
+  m_rma_id                                                  DECIMAL(10,0),
+  nullcolumns                    FOR COLUMN nullcols        VARCHAR(255),
+  taskstatus                                                CHAR(1),
+  datecompleteplan               FOR COLUMN dtecmppln       TIMESTAMP,
+  qtyplan                                                   DECFLOAT(16),
+  qtyspent                                                  DECFLOAT(16),
+  startdate                                                 TIMESTAMP,
+  enddate                                                   TIMESTAMP,
+  datestartplan                  FOR COLUMN dtestrpln       TIMESTAMP,
+  qtyinvoiced                    FOR COLUMN qtyinv          DECFLOAT(16),
+  m_productspent_id              FOR COLUMN m_pspentid      DECIMAL(10,0),
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  CONSTRAINT r_requestaction_pkey PRIMARY KEY (r_requestaction_id),
+  CONSTRAINT r_requestaction_isactive_check CHECK (isactive in ('Y','N'))
+)
+;
+

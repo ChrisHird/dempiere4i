@@ -1,0 +1,45 @@
+﻿-- View: gl_journalline_acct_v
+
+-- DROP VIEW gl_journalline_acct_v;
+
+ SELECT gl.gl_journalline_id,
+    gl.ad_client_id,
+    gl.ad_org_id,
+    gl.isactive,
+    gl.created,
+    gl.createdby,
+    gl.updated,
+    gl.updatedby,
+    gl.gl_journal_id,
+    gl.line,
+    gl.isgenerated,
+    gl.description,
+    gl.amtsourcedr,
+    gl.amtsourcecr,
+    gl.c_currency_id,
+    gl.c_conversiontype_id,
+    gl.currencyrate,
+    gl.dateacct,
+    gl.amtacctdr,
+    gl.amtacctcr,
+    gl.c_uom_id,
+    gl.qty,
+    gl.c_validcombination_id,
+    vc.c_acctschema_id,
+    vc.account_id,
+    vc.m_product_id,
+    vc.c_bpartner_id,
+    vc.ad_orgtrx_id,
+    vc.c_locfrom_id,
+    vc.c_locto_id,
+    vc.c_salesregion_id,
+    vc.c_project_id,
+    vc.c_campaign_id,
+    vc.user1_id,
+    vc.user2_id,
+    vc.isfullyqualified,
+    vc.c_activity_id
+FROM gljrnln gl,
+    c_validcombination vc
+  WHERE gl.c_validcombination_id = vc.c_validcombination_id;
+

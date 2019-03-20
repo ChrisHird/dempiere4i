@@ -1,0 +1,57 @@
+-- Table: i_product_asi
+
+-- DROP TABLE i_product_asi;
+
+CREATE TABLE i_product_asi FOR SYSTEM NAME iprdasi
+(
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  isactive                                                  CHAR(1) NOT NULL DEFAULT 'Y',
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  i_product_asi_id               FOR COLUMN i_pasiid        DECIMAL(10,0) NOT NULL,
+  i_errormsg                                                VARCHAR(2000) DEFAULT NULL,
+  i_isimported                   FOR COLUMN i_ii            CHAR(1) DEFAULT NULL,
+  processed                                                 CHAR(1) DEFAULT NULL,
+  processing                                                CHAR(1) DEFAULT NULL,
+  productvalue                   FOR COLUMN prodval         VARCHAR(40) DEFAULT NULL,
+  m_product_id                   FOR COLUMN m_pid           DECIMAL(10,0),
+  m_attributeset_id              FOR COLUMN m_atsid         DECIMAL(10,0),
+  m_attributesetinstance_id      FOR COLUMN m_asi           DECIMAL(10,0),
+  attributevaluetype             FOR COLUMN atrvaltyp       CHAR(1) DEFAULT NULL,
+  isinstanceattribute            FOR COLUMN isinstatr       CHAR(1) DEFAULT NULL,
+  ismandatory                    FOR COLUMN ismand          CHAR(1) DEFAULT NULL,
+  m_attributesearch_id           FOR COLUMN m_asid          DECIMAL(10,0),
+  attributevalue                 FOR COLUMN attrval         VARCHAR(60) DEFAULT NULL,
+  m_attribute_id                 FOR COLUMN m_aid           DECIMAL(10,0),
+  m_attributevalue_id            FOR COLUMN m_avid          DECIMAL(10,0),
+  attributename                  FOR COLUMN attrnam         VARCHAR(60) DEFAULT NULL,
+  guaranteedays                  FOR COLUMN gdays           DECIMAL(10,0),
+  isguaranteedate                FOR COLUMN isgdte          CHAR(1) DEFAULT NULL,
+  isguaranteedatemandatory       FOR COLUMN isgdteman       CHAR(1) DEFAULT NULL,
+  islot                                                     CHAR(1) DEFAULT NULL,
+  islotmandatory                 FOR COLUMN islotmdt        CHAR(1) DEFAULT NULL,
+  isserno                                                   CHAR(1) DEFAULT NULL,
+  issernomandatory               FOR COLUMN issnmand        CHAR(1) DEFAULT NULL,
+  mandatorytype                  FOR COLUMN mndtyp          CHAR(1) DEFAULT NULL,
+  attributesetname               FOR COLUMN atrsetnm        VARCHAR(60) DEFAULT NULL,
+  attributesearchname            FOR COLUMN atrsnm          VARCHAR(60) DEFAULT NULL,
+  elementname                    FOR COLUMN elemnam         VARCHAR(60) DEFAULT NULL,
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  CONSTRAINT i_product_asi_key PRIMARY KEY (i_product_asi_id),
+  CONSTRAINT i_product_asi_i_isimported_check CHECK (i_isimported in ('Y','N')),
+  CONSTRAINT i_product_asi_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT i_product_asi_isguaranteedate_check CHECK (isguaranteedate in ('Y','N')),
+  CONSTRAINT i_product_asi_isguaranteedatemandatory_check CHECK (isguaranteedatemandatory in ('Y','N')),
+  CONSTRAINT i_product_asi_isinstanceattribute_check CHECK (isinstanceattribute in ('Y','N')),
+  CONSTRAINT i_product_asi_islot_check CHECK (islot in ('Y','N')),
+  CONSTRAINT i_product_asi_islotmandatory_check CHECK (islotmandatory in ('Y','N')),
+  CONSTRAINT i_product_asi_ismandatory_check CHECK (ismandatory in ('Y','N')),
+  CONSTRAINT i_product_asi_isserno_check CHECK (isserno in ('Y','N')),
+  CONSTRAINT i_product_asi_issernomandatory_check CHECK (issernomandatory in ('Y','N')),
+  CONSTRAINT i_product_asi_processed_check CHECK (processed in ('Y','N'))
+)
+;
+

@@ -1,0 +1,55 @@
+-- Table: m_production
+
+-- DROP TABLE m_production;
+
+CREATE TABLE m_production FOR SYSTEM NAME mpdn
+(
+  m_production_id                FOR COLUMN m_pdnid         DECIMAL(10,0) NOT NULL,
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  isactive                                                  CHAR(1) NOT NULL DEFAULT 'Y',
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  name                                                      VARCHAR(60),
+  description                    FOR COLUMN desc            VARCHAR(255),
+  movementdate                   FOR COLUMN movdat          TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  iscreated                                                 CHAR(1) NOT NULL DEFAULT 'N',
+  posted                                                    CHAR(1) NOT NULL DEFAULT 'N',
+  processed                                                 CHAR(1) NOT NULL DEFAULT 'N',
+  processing                                                CHAR(1),
+  ad_orgtrx_id                   FOR COLUMN ad_otid         DECIMAL(10,0),
+  c_project_id                   FOR COLUMN c_prjid         DECIMAL(10,0),
+  c_campaign_id                  FOR COLUMN c_camid         DECIMAL(10,0),
+  c_activity_id                  FOR COLUMN c_aid           DECIMAL(10,0),
+  user1_id                                                  DECIMAL(10,0),
+  user2_id                                                  DECIMAL(10,0),
+  processedon                    FOR COLUMN prcon           DECFLOAT(16),
+  documentno                                                VARCHAR(30),
+  m_product_id                   FOR COLUMN m_pid           DECIMAL(10,0),
+  m_locator_id                   FOR COLUMN m_lid           DECIMAL(10,0),
+  productionqty                  FOR COLUMN pdnqty          DECFLOAT(16) DEFAULT 0,
+  datepromised                   FOR COLUMN datprm          TIMESTAMP,
+  iscomplete                                                CHAR(1),
+  c_orderline_id                 FOR COLUMN c_olid          DECIMAL(10,0),
+  createfrom                                                CHAR(1) DEFAULT 'N',
+  user3_id                                                  DECIMAL(10,0),
+  user4_id                                                  DECIMAL(10,0),
+  iswip                                                     CHAR(1) NOT NULL DEFAULT 'N',
+  c_doctype_id                   FOR COLUMN c_dtid          DECIMAL(10,0),
+  docaction                                                 CHAR(2) DEFAULT 'CO',
+  docstatus                                                 VARCHAR(2) DEFAULT 'DR',
+  reversal_id                    FOR COLUMN revid           DECIMAL(10,0),
+  m_productionbatch_id           FOR COLUMN m_pbtchid       DECIMAL(10,0),
+  mustbestocked                  FOR COLUMN mustblck        CHAR(1) DEFAULT 'Y',
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  CONSTRAINT m_production_pkey PRIMARY KEY (m_production_id),
+  CONSTRAINT m_production_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT m_production_iscreated_check CHECK (iscreated in ('Y','N')),
+  CONSTRAINT m_production_iswip_check CHECK (iswip in ('Y','N')),
+  CONSTRAINT m_production_mustbestocked_check CHECK (mustbestocked in ('Y','N')),
+  CONSTRAINT m_production_processed_check CHECK (processed in ('Y','N'))
+)
+;
+

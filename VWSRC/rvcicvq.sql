@@ -1,0 +1,32 @@
+﻿-- View: rv_c_invoice_customervendqtr
+
+-- DROP VIEW rv_c_invoice_customervendqtr;
+
+ SELECT il.ad_client_id,
+    il.ad_org_id,
+    il.c_bpartner_id,
+    po.c_bpartner_id AS vendor_id,
+    firstof(il.dateinvoiced, 'Q') AS dateinvoiced,
+    sum(il.linenetamt) AS linenetamt,
+    sum(il.linelistamt) AS linelistamt,
+    sum(il.linelimitamt) AS linelimitamt,
+    sum(il.linediscountamt) AS linediscountamt,
+        CASE
+            WHEN sum(il.linelistamt) = 0 THEN 0
+            ELSE round((sum(il.linelistamt) - sum(il.linenetamt)) / sum(il.linelistamt) * 100, 2)
+        END AS linediscount,
+    sum(il.lineoverlimitamt) AS lineoverlimitamt,
+        CASE
+            WHEN sum(il.linenetamt) = 0 THEN 0
+            ELSE 100 - round((sum(il.linenetamt) - sum(il.lineoverlimitamt)) / sum(il.linenetamt) * 100, 2)
+        END AS lineoverlimit,
+    sum(il.qtyinvoiced) AS qtyinvoiced,
+    il.issotrx,
+    il.c_bp_group_id,
+    il.c_doctypetarget_id,
+    il.docstatus
+JOIN mprodpo po ON il.m_product_id = po.m_product_id
+  GROUP BY il.ad_client_id, il.ad_org_id, il.c_bpartner_id, po.c_bpartner_id, 
+  (firstof(il.dateinvoiced, 'Q')), il.issotrx, il.c_bp_group_id, il.c_doctypetarget_id, 
+  il.docstatus;
+

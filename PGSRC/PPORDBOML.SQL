@@ -1,0 +1,57 @@
+-- Table: pp_order_bomline
+
+-- DROP TABLE pp_order_bomline;
+
+CREATE TABLE pp_order_bomline FOR SYSTEM NAME ppordboml
+(
+  description                    FOR COLUMN desc            VARCHAR(255),
+  feature                                                   VARCHAR(30),
+  m_product_id                   FOR COLUMN m_pid           DECIMAL(10,0) NOT NULL,
+  backflushgroup                 FOR COLUMN bfgrp           VARCHAR(30),
+  c_uom_id                                                  DECIMAL(10,0) NOT NULL,
+  componenttype                  FOR COLUMN cpntype         CHAR(2) DEFAULT 'CO',
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  datedelivered                  FOR COLUMN datdel          TIMESTAMP,
+  forecast                                                  DECFLOAT(16),
+  help                                                      VARCHAR(2000),
+  isactive                                                  CHAR(1) NOT NULL,
+  iscritical                                                CHAR(1) NOT NULL,
+  isqtypercentage                FOR COLUMN isqtypc         CHAR(1),
+  issuemethod                    FOR COLUMN issuemthd       CHAR(1),
+  leadtimeoffset                 FOR COLUMN ltimeoff        DECIMAL(10,0),
+  line                                                      DECIMAL(10,0) NOT NULL,
+  m_attributesetinstance_id      FOR COLUMN m_asi           DECIMAL(10,0),
+  m_changenotice_id              FOR COLUMN m_chgnid        DECIMAL(10,0),
+  m_locator_id                   FOR COLUMN m_lid           DECIMAL(10,0),
+  m_warehouse_id                 FOR COLUMN m_wid           DECIMAL(10,0) NOT NULL,
+  pp_order_bomline_id            FOR COLUMN pp_obomlid      DECIMAL(10,0) NOT NULL,
+  pp_order_bom_id                FOR COLUMN pp_obomid       DECIMAL(10,0) NOT NULL,
+  pp_order_id                    FOR COLUMN pp_ordid        DECIMAL(10,0) NOT NULL,
+  qtybom                                                    DECFLOAT(16) NOT NULL,
+  qtybatch                                                  DECFLOAT(16) NOT NULL,
+  qtydelivered                   FOR COLUMN qtydel          DECFLOAT(16) NOT NULL,
+  qtyentered                                                DECFLOAT(16),
+  qtypost                                                   DECFLOAT(16) NOT NULL,
+  qtyreject                                                 DECFLOAT(16) NOT NULL,
+  qtyrequired                    FOR COLUMN qtyreq          DECFLOAT(16) NOT NULL,
+  qtyreserved                    FOR COLUMN qtyrsvd         DECFLOAT(16) NOT NULL,
+  qtyscrap                                                  DECFLOAT(16) NOT NULL,
+  scrap                                                     DECFLOAT(16),
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  validfro                                                  TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  validto                                                   TIMESTAMP,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  assay                                                     DECFLOAT(16),
+  ad_user_id                                                DECIMAL(10,0),
+  costallocationperc             FOR COLUMN cstalcperc      DECFLOAT(16) DEFAULT 0,
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  CONSTRAINT pp_order_bomline_pkey PRIMARY KEY (pp_order_bomline_id),
+  CONSTRAINT pp_order_bomline_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT pp_order_bomline_iscritical_check CHECK (iscritical in ('Y','N')),
+  CONSTRAINT pp_order_bomline_isqtypercentage_check CHECK (isqtypercentage in ('Y','N'))
+)
+;
+

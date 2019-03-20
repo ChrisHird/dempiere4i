@@ -1,0 +1,58 @@
+-- Table: a_depreciation_workfile
+
+-- DROP TABLE a_depreciation_workfile;
+
+CREATE TABLE a_depreciation_workfile FOR SYSTEM NAME adepwf
+(
+  a_depreciation_workfile_id     FOR COLUMN a_depwfid       DECIMAL(10,0) NOT NULL,
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  a_accumulated_depr             FOR COLUMN a_adep          DECFLOAT(16) NOT NULL DEFAULT 0,
+  a_asset_cost                   FOR COLUMN a_acst          DECFLOAT(16) NOT NULL DEFAULT 0,
+  a_asset_id                                                DECIMAL(10,0) NOT NULL,
+  a_asset_life_current_year      FOR COLUMN a_alfcy         DECFLOAT(16) NOT NULL DEFAULT 0,
+  a_period_forecast              FOR COLUMN a_pdfcst        DECFLOAT(16),
+  a_prior_year_accumulated_depr  FOR COLUMN a_pryadep       DECFLOAT(16),
+  postingtype                    FOR COLUMN posttyp         CHAR(1) DEFAULT 'A',
+  isdepreciated                  FOR COLUMN isdeptd         CHAR(1),
+  isactive                                                  CHAR(1) NOT NULL,
+  dateacct                                                  TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  assetdepreciationdate          FOR COLUMN addte           TIMESTAMP,
+  a_salvage_value                FOR COLUMN a_svgval        DECFLOAT(16) NOT NULL DEFAULT 0,
+  a_qty_current                  FOR COLUMN a_qcur          DECFLOAT(16) NOT NULL,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  processing                                                CHAR(1) DEFAULT 'N',
+  a_period_posted                FOR COLUMN a_pdpst         DECIMAL(10,0),
+  a_life_period                  FOR COLUMN a_lfpd          DECIMAL(10,0) NOT NULL DEFAULT 0,
+  a_asset_life_years             FOR COLUMN a_alfy          DECIMAL(10,0) NOT NULL DEFAULT 0,
+  a_base_amount                  FOR COLUMN a_bseamt        DECFLOAT(16),
+  a_calc_accumulated_depr        FOR COLUMN a_cacddpr       DECFLOAT(16) DEFAULT 0,
+  a_curr_dep_exp                 FOR COLUMN a_curdexp       DECFLOAT(16) NOT NULL DEFAULT 0,
+  a_current_period               FOR COLUMN a_curpd         DECIMAL(10,0),
+  a_accumulated_depr_f           FOR COLUMN a_adepf         DECFLOAT(16) NOT NULL DEFAULT 0,
+  a_asset_life_years_f           FOR COLUMN a_alfyf         DECIMAL(10,0) NOT NULL DEFAULT 0,
+  a_life_period_f                FOR COLUMN a_lfpdf         DECIMAL(10,0) NOT NULL DEFAULT 0,
+  uselifeyears                   FOR COLUMN uly             DECIMAL(10,0) NOT NULL DEFAULT 0,
+  uselifemonths                  FOR COLUMN ulm             DECIMAL(10,0) NOT NULL DEFAULT 0,
+  uselifeyears_f                 FOR COLUMN uselfyf         DECIMAL(10,0) NOT NULL DEFAULT 0,
+  uselifemonths_f                FOR COLUMN uselfmf         DECIMAL(10,0) NOT NULL DEFAULT 0,
+  a_asset_remaining              FOR COLUMN a_aremn         DECFLOAT(16),
+  a_asset_remaining_f            FOR COLUMN a_aremnf        DECFLOAT(16),
+  a_tip_finantare                FOR COLUMN a_tipfin        CHAR(1) NOT NULL DEFAULT 'P',
+  a_valoare_cofinantare          FOR COLUMN a_vconf         DECFLOAT(16),
+  a_valoare_tert                 FOR COLUMN a_vtert         DECFLOAT(16),
+  description                    FOR COLUMN desc            VARCHAR(255) DEFAULT NULL,
+  a_fundingmode_id               FOR COLUMN a_fndmid        DECIMAL(10,0),
+  processed                                                 CHAR(1) NOT NULL DEFAULT 'N',
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  CONSTRAINT a_depreciation_workfile_pkey PRIMARY KEY (a_depreciation_workfile_id),
+  CONSTRAINT a_depreciation_workfile_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT a_depreciation_workfile_isdepreciated_check CHECK (isdepreciated in ('Y','N')),
+  CONSTRAINT a_depreciation_workfile_processed_check CHECK (processed in ('Y','N')),
+  CONSTRAINT a_depreciation_workfile_processing_check CHECK (processing in ('Y','N'))
+)
+;
+

@@ -1,0 +1,53 @@
+-- Table: ad_package_exp_detail
+
+-- DROP TABLE ad_package_exp_detail;
+
+CREATE TABLE ad_package_exp_detail FOR SYSTEM NAME adpkgedet
+(
+  ad_package_exp_detail_id       FOR COLUMN ad_pkgxdid      DECIMAL(10,0) NOT NULL,
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  isactive                                                  CHAR(1) NOT NULL DEFAULT 'Y',
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECFLOAT(16) NOT NULL,
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updatedby                                                 DECFLOAT(16) NOT NULL,
+  ad_form_id                                                DECIMAL(10,0),
+  ad_impformat_id                FOR COLUMN ad_ifid         DECIMAL(10,0),
+  ad_menu_id                                                DECIMAL(10,0),
+  ad_process_id                  FOR COLUMN ad_pid          DECIMAL(10,0),
+  ad_role_id                                                DECIMAL(10,0),
+  ad_window_id                   FOR COLUMN ad_winid        DECIMAL(10,0),
+  ad_workflow_id                 FOR COLUMN ad_wfid         DECIMAL(10,0),
+  file_directory                 FOR COLUMN file_dir        VARCHAR(255),
+  filename                                                  VARCHAR(255),
+  destination_filename           FOR COLUMN dest_fn         VARCHAR(255),
+  destination_directory          FOR COLUMN dest_dir        VARCHAR(255),
+  description                    FOR COLUMN desc            VARCHAR(1000) NOT NULL,
+  dbtype                                                    VARCHAR(22),
+  type                                                      VARCHAR(10) NOT NULL,
+  target_directory               FOR COLUMN tgt_dir         VARCHAR(255),
+  sqlstatement                   FOR COLUMN sqlstmnt        VARCHAR(2000),
+  releaseno                                                 VARCHAR(20),
+  processing                                                CHAR(1) NOT NULL,
+  processed                                                 CHAR(1),
+  name2                                                     VARCHAR(60),
+  line                                                      DECFLOAT(16),
+  ad_workbench_id                FOR COLUMN ad_wid          DECIMAL(10,0),
+  ad_table_id                    FOR COLUMN ad_tid          DECIMAL(10,0),
+  ad_reportview_id               FOR COLUMN ad_rptvid       DECIMAL(10,0),
+  ad_package_exp_id              FOR COLUMN ad_pkgxid       DECIMAL(10,0) NOT NULL,
+  ad_package_code_new            FOR COLUMN ad_pkgcnew      VARCHAR(2000),
+  ad_package_code_old            FOR COLUMN ad_pkgcold      VARCHAR(2000),
+  ad_val_rule_id                 FOR COLUMN ad_vrid         DECIMAL(10,0),
+  ad_message_id                  FOR COLUMN ad_mid          DECIMAL(10,0),
+  ad_printformat_id              FOR COLUMN ad_pfmtid       DECIMAL(10,0),
+  ad_reference_id                FOR COLUMN ad_rid          DECIMAL(10,0),
+  ad_modelvalidator_id           FOR COLUMN ad_mvalid       DECIMAL(10,0),
+  ad_entitytype_id               FOR COLUMN ad_enttid       DECIMAL(10,0),
+  ad_view_id                                                DECIMAL(10,0),
+  ad_browse_id                   FOR COLUMN ad_bwsid        DECIMAL(10,0),
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  CONSTRAINT ad_package_exp_detail_pkey PRIMARY KEY (ad_package_exp_detail_id)
+)
+  ;

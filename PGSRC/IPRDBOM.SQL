@@ -1,0 +1,58 @@
+-- Table: i_product_bom
+
+-- DROP TABLE i_product_bom;
+
+CREATE TABLE i_product_bom FOR SYSTEM NAME iprdbom
+(
+  i_product_bom_id               FOR COLUMN i_prdbomid      DECIMAL(10,0) NOT NULL,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  isactive                                                  CHAR(1) NOT NULL DEFAULT 'Y',
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  i_errormsg                                                VARCHAR(2000),
+  i_isimported                   FOR COLUMN i_ii            CHAR(1) NOT NULL DEFAULT 'N',
+  processed                                                 CHAR(1),
+  processing                                                CHAR(1),
+  pp_product_bomline_id          FOR COLUMN pp_pbomlid      DECIMAL(10,0),
+  productvalue                   FOR COLUMN prodval         VARCHAR(60),
+  m_product_id                   FOR COLUMN m_pid           DECIMAL(10,0),
+  x12de355                                                  VARCHAR(60),
+  c_uom_id                                                  DECIMAL(10,0),
+  value                                                     VARCHAR(40),
+  name                                                      VARCHAR(60),
+  validfrom                                                 TIMESTAMP,
+  bomtype                                                   VARCHAR(2),
+  bomuse                                                    VARCHAR(2),
+  description                    FOR COLUMN desc            VARCHAR(255),
+  documentno                                                VARCHAR(22),
+  validto                                                   TIMESTAMP,
+  help                                                      VARCHAR(2000),
+  componenttype                  FOR COLUMN cpntype         VARCHAR(2),
+  qtybom                                                    DECFLOAT(16),
+  qtybatch                                                  DECFLOAT(16),
+  issuemethod                    FOR COLUMN issuemthd       CHAR(1),
+  isqtypercentage                FOR COLUMN isqtypc         CHAR(1),
+  product_bom_value              FOR COLUMN prdbomval       VARCHAR(40),
+  orgvalue                                                  VARCHAR(40),
+  m_changenotice_id              FOR COLUMN m_chgnid        DECIMAL(10,0),
+  costallocationperc             FOR COLUMN cstalcperc      DECFLOAT(16),
+  scrap                                                     DECFLOAT(16),
+  assay                                                     DECFLOAT(16),
+  backflushgroup                 FOR COLUMN bfgrp           VARCHAR(20),
+  leadtimeoffset                 FOR COLUMN ltimeoff        DECIMAL(10,0),
+  iscritical                                                CHAR(1) DEFAULT 'N',
+  m_bomproduct_id                FOR COLUMN m_bompid        DECIMAL(10,0),
+  pp_product_bom_id              FOR COLUMN pp_pbomid       DECIMAL(10,0),
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  CONSTRAINT i_product_bom_pkey PRIMARY KEY (i_product_bom_id),
+  CONSTRAINT i_product_bom_i_isimported_check CHECK (i_isimported in ('Y','N')),
+  CONSTRAINT i_product_bom_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT i_product_bom_iscritical_check CHECK (iscritical in ('Y','N')),
+  CONSTRAINT i_product_bom_isqtypercentage_check CHECK (isqtypercentage in ('Y','N')),
+  CONSTRAINT i_product_bom_processed_check CHECK (processed in ('Y','N'))
+)
+;
+

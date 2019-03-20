@@ -1,0 +1,57 @@
+-- Table: m_inoutline
+
+-- DROP TABLE m_inoutline;
+
+CREATE TABLE m_inoutline FOR SYSTEM NAME mioln
+(
+  m_inoutline_id                 FOR COLUMN m_iolid         DECIMAL(10,0) NOT NULL,
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  isactive                                                  CHAR(1) NOT NULL DEFAULT 'Y',
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  line                                                      DECIMAL(10,0) NOT NULL,
+  description                    FOR COLUMN desc            VARCHAR(255),
+  m_inout_id                                                DECIMAL(10,0) NOT NULL,
+  c_orderline_id                 FOR COLUMN c_olid          DECIMAL(10,0),
+  m_locator_id                   FOR COLUMN m_lid           DECIMAL(10,0),
+  m_product_id                   FOR COLUMN m_pid           DECIMAL(10,0),
+  c_uom_id                                                  DECIMAL(10,0) NOT NULL,
+  movementqty                    FOR COLUMN movqty          DECFLOAT(16) NOT NULL DEFAULT 0,
+  isinvoiced                                                CHAR(1) NOT NULL DEFAULT 'N',
+  m_attributesetinstance_id      FOR COLUMN m_asi           DECIMAL(10,0) DEFAULT 0,
+  isdescription                  FOR COLUMN isdescr         CHAR(1) NOT NULL DEFAULT 'N',
+  confirmedqty                   FOR COLUMN cfmqty          DECFLOAT(16) DEFAULT 0,
+  pickedqty                                                 DECFLOAT(16) DEFAULT 0,
+  scrappedqty                    FOR COLUMN scrqty          DECFLOAT(16) DEFAULT 0,
+  targetqty                                                 DECFLOAT(16) DEFAULT 0,
+  ref_inoutline_id               FOR COLUMN refiolid        DECIMAL(10,0),
+  processed                                                 CHAR(1) NOT NULL DEFAULT 'N',
+  qtyentered                                                DECFLOAT(16) NOT NULL,
+  c_charge_id                    FOR COLUMN c_cgid          DECIMAL(10,0),
+  c_project_id                   FOR COLUMN c_prjid         DECIMAL(10,0),
+  c_projectphase_id              FOR COLUMN c_prjpid        DECIMAL(10,0),
+  c_projecttask_id               FOR COLUMN c_prjtskid      DECIMAL(10,0),
+  c_campaign_id                  FOR COLUMN c_camid         DECIMAL(10,0),
+  c_activity_id                  FOR COLUMN c_aid           DECIMAL(10,0),
+  user1_id                                                  DECIMAL(10,0),
+  user2_id                                                  DECIMAL(10,0),
+  ad_orgtrx_id                   FOR COLUMN ad_otid         DECIMAL(10,0),
+  m_rmaline_id                   FOR COLUMN m_rmalid        DECIMAL(10,0),
+  reversalline_id                FOR COLUMN revlnid         DECIMAL(10,0),
+  tobeinvoiced                   FOR COLUMN tbinvd          CHAR(1) DEFAULT 'Y',
+  user3_id                                                  DECIMAL(10,0),
+  user4_id                                                  DECIMAL(10,0),
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  freightamt                                                DECFLOAT(16),
+  m_freightcategory_id           FOR COLUMN m_fcid          DECIMAL(10,0),
+  m_shipper_id                   FOR COLUMN m_sid           DECIMAL(10,0),
+  CONSTRAINT m_inoutline_pkey PRIMARY KEY (m_inoutline_id),
+  CONSTRAINT m_inoutline_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT m_inoutline_isinvoiced_check CHECK (isinvoiced in ('Y','N')),
+  CONSTRAINT m_inoutline_tobeinvoiced_check CHECK (tobeinvoiced in ('Y','N'))
+)
+;
+

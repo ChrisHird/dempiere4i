@@ -1,0 +1,17 @@
+﻿-- Function: daysbetween(TIMESTAMP, TIMESTAMP)
+
+-- DROP FUNCTION daysbetween(TIMESTAMP, TIMESTAMP);
+
+CREATE OR REPLACE FUNCTION daysbetween(
+    p_date1 TIMESTAMP,
+    p_date2 TIMESTAMP)
+  RETURNS integer AS
+$BODY$
+BEGIN
+	RETURN CAST(p_date1 AS DATE) - CAST(p_date2 as DATE);
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100;
+ALTER FUNCTION daysbetween(TIMESTAMP, TIMESTAMP)
+  OWNER TO adempiere;

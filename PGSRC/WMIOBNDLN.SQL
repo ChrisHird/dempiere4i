@@ -1,0 +1,57 @@
+-- Table: wm_inoutboundline
+
+-- DROP TABLE wm_inoutboundline;
+
+CREATE TABLE wm_inoutboundline FOR SYSTEM NAME wmiobndln
+(
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  isactive                                                  CHAR(1) NOT NULL DEFAULT 'Y',
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  wm_inoutboundline_id           FOR COLUMN wm_ioblid       DECIMAL(10,0) NOT NULL,
+  ad_orgtrx_id                   FOR COLUMN ad_otid         DECIMAL(10,0),
+  c_activity_id                  FOR COLUMN c_aid           DECIMAL(10,0),
+  c_campaign_id                  FOR COLUMN c_camid         DECIMAL(10,0),
+  c_charge_id                    FOR COLUMN c_cgid          DECIMAL(10,0),
+  c_orderline_id                 FOR COLUMN c_olid          DECIMAL(10,0),
+  c_projectphase_id              FOR COLUMN c_prjpid        DECIMAL(10,0),
+  c_projecttask_id               FOR COLUMN c_prjtskid      DECIMAL(10,0),
+  c_project_id                   FOR COLUMN c_prjid         DECIMAL(10,0),
+  c_uom_id                                                  DECIMAL(10,0) NOT NULL,
+  description                    FOR COLUMN desc            VARCHAR(255),
+  isdescription                  FOR COLUMN isdescr         CHAR(1) NOT NULL DEFAULT 'N',
+  line                                                      DECIMAL(10,0) NOT NULL,
+  m_attributesetinstance_id      FOR COLUMN m_asi           DECIMAL(10,0),
+  wm_inoutbound_id               FOR COLUMN wm_iobid        DECIMAL(10,0) NOT NULL,
+  m_product_id                   FOR COLUMN m_pid           DECIMAL(10,0),
+  movementqty                    FOR COLUMN movqty          DECFLOAT(16) NOT NULL DEFAULT 0,
+  pickedqty                                                 DECFLOAT(16),
+  processed                                                 CHAR(1) NOT NULL,
+  user1_id                                                  DECIMAL(10,0),
+  user2_id                                                  DECIMAL(10,0),
+  pickdate                                                  TIMESTAMP,
+  shipdate                                                  TIMESTAMP,
+  pp_mrp_id                                                 DECIMAL(10,0),
+  dd_orderline_id                FOR COLUMN dd_ordlid       DECIMAL(10,0),
+  pp_order_bomline_id            FOR COLUMN pp_obomlid      DECIMAL(10,0),
+  dd_order_id                    FOR COLUMN dd_ordid        DECIMAL(10,0),
+  pp_order_id                    FOR COLUMN pp_ordid        DECIMAL(10,0),
+  c_order_id                                                DECIMAL(10,0),
+  freightamt                                                DECFLOAT(16),
+  m_locator_id                   FOR COLUMN m_lid           DECIMAL(10,0),
+  m_locatorto_id                 FOR COLUMN m_ltid          DECIMAL(10,0),
+  c_invoiceline_id               FOR COLUMN c_ilid          DECIMAL(10,0),
+  c_invoice_id                   FOR COLUMN c_iid           DECIMAL(10,0),
+  m_shipper_id                   FOR COLUMN m_sid           DECIMAL(10,0),
+  m_freightcategory_id           FOR COLUMN m_fcid          DECIMAL(10,0),
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  CONSTRAINT wm_inoutboundline_key PRIMARY KEY (wm_inoutboundline_id),
+  CONSTRAINT wm_inoutboundline_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT wm_inoutboundline_isdescription_check CHECK (isdescription in ('Y','N')),
+  CONSTRAINT wm_inoutboundline_processed_check CHECK (processed in ('Y','N'))
+)
+;
+

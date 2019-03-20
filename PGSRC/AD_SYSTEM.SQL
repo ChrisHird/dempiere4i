@@ -1,0 +1,55 @@
+-- Table: ad_system
+
+-- DROP TABLE ad_system;
+
+CREATE TABLE ad_system
+(
+  ad_system_id                   FOR COLUMN ad_sysid        DECIMAL(10,0) NOT NULL,
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  isactive                                                  CHAR(1) NOT NULL DEFAULT 'Y',
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  name                                                      VARCHAR(60) NOT NULL,
+  username                                                  VARCHAR(60) NOT NULL,
+  info                                                      VARCHAR(255),
+  version                                                   VARCHAR(20),
+  releaseno                                                 VARCHAR(10),
+  supportunits                   FOR COLUMN supunits        DECIMAL(10,0),
+  password                                                  VARCHAR(20),
+  replicationtype                FOR COLUMN reptyp          CHAR(1) NOT NULL DEFAULT 'L',
+  idrangestart                   FOR COLUMN idrstr          DECFLOAT(16),
+  idrangeend                                                DECFLOAT(16),
+  ldaphost                                                  VARCHAR(60),
+  customprefix                   FOR COLUMN custpfx         VARCHAR(60),
+  isjustmigrated                 FOR COLUMN isjmigr         CHAR(1) DEFAULT 'N',
+  dbinstance                                                VARCHAR(60),
+  dbaddress                                                 VARCHAR(255),
+  noprocessors                   FOR COLUMN numprcs         DECIMAL(10,0),
+  summary                                                   VARCHAR(255),
+  encryptionkey                  FOR COLUMN enck            VARCHAR(255),
+  ldapdomain                                                VARCHAR(255),
+  isautoerrorreport              FOR COLUMN isatoerpt       CHAR(1) NOT NULL DEFAULT 'Y',
+  record_id                                                 DECIMAL(10,0),
+  supportexpdate                 FOR COLUMN spptexdte       TIMESTAMP,
+  processing                                                CHAR(1),
+  supportemail                   FOR COLUMN spptem          VARCHAR(60),
+  isallowstatistics              FOR COLUMN isalwstat       CHAR(1) NOT NULL DEFAULT 'Y',
+  statisticsinfo                 FOR COLUMN statsinf        VARCHAR(60),
+  profileinfo                    FOR COLUMN prfinfo         VARCHAR(60),
+  oldname                                                   VARCHAR(60),
+  description                    FOR COLUMN desc            VARCHAR(255),
+  systemstatus                   FOR COLUMN sysstatus       CHAR(1) NOT NULL DEFAULT 'E',
+  isfailonmissingmodelvalidator  FOR COLUMN isfommval       CHAR(1) NOT NULL DEFAULT 'Y',
+  lastbuildinfo                  FOR COLUMN lstbldinf       VARCHAR(255),
+  isfailonbuilddiffer            FOR COLUMN isfoblddif      CHAR(1) NOT NULL DEFAULT 'N',
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  CONSTRAINT ad_system_pkey PRIMARY KEY (ad_system_id, ad_client_id),
+  CONSTRAINT ad_system_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT ad_system_isfailonbuilddiffer_check CHECK (isfailonbuilddiffer in ('Y','N')),
+  CONSTRAINT ad_system_isfailonmissingmodelvalidator_check CHECK (isfailonmissingmodelvalidator in ('Y','N'))
+)
+;
+

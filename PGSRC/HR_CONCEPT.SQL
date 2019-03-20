@@ -1,0 +1,58 @@
+-- Table: hr_concept
+
+-- DROP TABLE hr_concept;
+
+CREATE TABLE hr_concept
+(
+  accountsign                    FOR COLUMN actsgn          CHAR(1),
+  issaveinhistoric               FOR COLUMN issavhist       CHAR(1),
+  isreceipt                                                 CHAR(1),
+  ispaid                                                    CHAR(1),
+  value                                                     VARCHAR(40),
+  name                                                      VARCHAR(60) NOT NULL,
+  hr_concept_category_id         FOR COLUMN hr_cptcid       DECIMAL(10,0),
+  hr_concept_id                  FOR COLUMN he_cptid        DECIMAL(10,0) NOT NULL,
+  hr_department_id               FOR COLUMN hr_deptid       DECIMAL(10,0),
+  hr_job_id                                                 DECIMAL(10,0),
+  hr_payroll_id                  FOR COLUMN hr_prid         DECIMAL(10,0),
+  isactive                                                  CHAR(1) NOT NULL,
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  isemployee                                                CHAR(1),
+  isprinted                                                 CHAR(1),
+  ismanual                                                  CHAR(1),
+  type                                                      CHAR(1) NOT NULL,
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  validfrom                                                 TIMESTAMP,
+  validto                                                   TIMESTAMP,
+  isdefault                                                 CHAR(1),
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  columntype                                                CHAR(1) NOT NULL,
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  description                    FOR COLUMN desc            VARCHAR(255),
+  ad_reference_id                FOR COLUMN ad_rid          DECIMAL(10,0),
+  seqno                                                     DECIMAL(10,0),
+  isinvoiced                                                CHAR(1) DEFAULT NULL,
+  hr_concept_type_id             FOR COLUMN hr_cpttid       DECIMAL(10,0),
+  istaxexempt                    FOR COLUMN istxexmp        CHAR(1) DEFAULT NULL,
+  isprepayment                   FOR COLUMN iprepay         CHAR(1) DEFAULT 'N',
+  isnotsaveinhistoryifnull       FOR COLUMN isnsavihin      CHAR(1) DEFAULT 'N',
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  stdprecision                   FOR COLUMN stdprec         DECIMAL(10,0),
+  CONSTRAINT hr_concept_pkey PRIMARY KEY (hr_concept_id),
+  CONSTRAINT hr_concept_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT hr_concept_isdefault_check CHECK (isdefault in ('Y','N')),
+  CONSTRAINT hr_concept_isemployee_check CHECK (isemployee in ('Y','N')),
+  CONSTRAINT hr_concept_isinvoiced_check CHECK (isinvoiced in ('Y','N')),
+  CONSTRAINT hr_concept_ismanual_check CHECK (ismanual in ('Y','N')),
+  CONSTRAINT hr_concept_isnotsaveinhistoryifnull_check CHECK (isnotsaveinhistoryifnull in ('Y','N')),
+  CONSTRAINT hr_concept_ispaid_check CHECK (ispaid in ('Y','N')),
+  CONSTRAINT hr_concept_isprepayment_check CHECK (isprepayment in ('Y','N')),
+  CONSTRAINT hr_concept_isprinted_check CHECK (isprinted in ('Y','N')),
+  CONSTRAINT hr_concept_isreceipt_check CHECK (isreceipt in ('Y','N')),
+  CONSTRAINT hr_concept_issaveinhistoric_check CHECK (issaveinhistoric in ('Y','N')),
+  CONSTRAINT hr_concept_istaxexempt_check CHECK (istaxexempt in ('Y','N'))
+)
+;
+

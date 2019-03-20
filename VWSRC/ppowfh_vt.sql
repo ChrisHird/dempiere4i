@@ -1,0 +1,87 @@
+﻿-- View: pp_order_workflow_header_vt
+
+-- DROP VIEW pp_order_workflow_header_vt;
+
+ SELECT o.ad_client_id,
+    o.ad_org_id,
+    o.isactive,
+    o.created,
+    o.createdby,
+    o.updated,
+    o.updatedby,
+    owt.ad_language,
+    o.pp_order_id,
+    o.docstatus,
+    o.c_doctype_id,
+    oi.c_location_id AS org_location_id,
+    oi.taxid,
+    o.m_warehouse_id,
+    wh.c_location_id AS warehouse_location_id,
+    dt.printname AS documenttype,
+    dt.documentnote AS documenttypenote,
+    o.planner_id,
+    u.name AS salesrep_name,
+    o.datestart,
+    o.datestartschedule,
+    o.floatafter,
+    o.floatbefored,
+    o.line,
+    o.lot,
+    o.serno,
+    o.c_uom_id,
+    o.pp_product_bom_id,
+    o.assay,
+    o.c_orderline_id,
+    o.priorityrule,
+    o.qtybatchsize,
+    o.qtybatchs,
+    o.qtydelivered,
+    o.qtyentered,
+    o.qtyordered,
+    o.dateconfirm,
+    o.datedelivered,
+    o.datefinish,
+    o.datefinishschedule,
+    o.dateordered,
+    o.datepromised,
+    o.qtyreject,
+    o.qtyreserved,
+    o.qtyscrap,
+    o.s_resource_id,
+    o.c_campaign_id,
+    o.c_project_id,
+    o.c_activity_id,
+    owt.name,
+    owt.description,
+    owt.help,
+    ow.author,
+    ow.cost,
+    ow.documentno,
+    ow.duration,
+    ow.durationunit,
+    ow.version,
+    ow.validfrom,
+    ow.validto,
+    ow.movingtime,
+    ow.overlapunits,
+    ow.ad_workflow_id,
+    ow.publishstatus,
+    ow.queuingtime,
+    ow.setuptime,
+    ow.unitscycles,
+    ow.waitingtime,
+    ow.workflowtype,
+    ow.workingtime,
+    ow.yield,
+    COALESCE(oi.logo_id, ci.logo_id) AS logo_id
+   FROM pp_order o
+JOIN ppordwf ow ON ow.pp_order_id = o.pp_order_id
+JOIN ppordwft ow ON ow.pp_order_id = o.pp_order_id
+JOIN ppordwft owt ON owt.pp_order_workflow_id = ow.pp_order_workflow_id
+     JOIN c_doctype dt ON o.c_doctype_id = dt.c_doctype_id
+JOIN mwhse wh ON o.m_warehouse_id = wh.m_warehouse_id
+JOIN mwhsea wh ON o.m_warehouse_id = wh.m_warehouse_id
+     JOIN ad_orginfo oi ON o.ad_org_id = oi.ad_org_id
+JOIN adclntinf ci ON o.ad_client_id = ci.ad_client_id
+     LEFT JOIN ad_user u ON o.planner_id = u.ad_user_id;
+

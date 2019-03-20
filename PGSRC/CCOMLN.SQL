@@ -1,0 +1,56 @@
+-- Table: c_commissionline
+
+-- DROP TABLE c_commissionline;
+
+CREATE TABLE c_commissionline FOR SYSTEM NAME ccomln
+(
+  c_commissionline_id            FOR COLUMN c_comlid        DECIMAL(10,0) NOT NULL,
+  ad_client_id                   FOR COLUMN ad_cid          DECIMAL(10,0) NOT NULL,
+  ad_org_id                                                 DECIMAL(10,0) NOT NULL,
+  isactive                                                  CHAR(1) NOT NULL DEFAULT 'Y',
+  created                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  createdby                                                 DECIMAL(10,0) NOT NULL,
+  updated                                                   TIMESTAMP NOT NULL WITH DEFAULT CURRENT_TIMESTAMP,
+  updatedby                                                 DECIMAL(10,0) NOT NULL,
+  c_commission_id                FOR COLUMN c_comid         DECIMAL(10,0) NOT NULL,
+  line                                                      DECIMAL(10,0) NOT NULL,
+  description                    FOR COLUMN desc            VARCHAR(255),
+  amtsubtract                    FOR COLUMN amtsub          DECFLOAT(16) NOT NULL,
+  amtmultiplier                  FOR COLUMN amtmult         DECFLOAT(16) NOT NULL,
+  qtysubtract                    FOR COLUMN qtysub          DECFLOAT(16) NOT NULL,
+  qtymultiplier                  FOR COLUMN qtymult         DECFLOAT(16) NOT NULL,
+  ispositiveonly                 FOR COLUMN isposonly       CHAR(1) NOT NULL DEFAULT 'Y',
+  commissionorders               FOR COLUMN comords         CHAR(1) NOT NULL DEFAULT 'N',
+  org_id                                                    DECIMAL(10,0),
+  m_product_category_id          FOR COLUMN m_pcid          DECIMAL(10,0),
+  m_product_id                   FOR COLUMN m_pid           DECIMAL(10,0),
+  c_bp_group_id                  FOR COLUMN c_bpgid         DECIMAL(10,0),
+  c_bpartner_id                  FOR COLUMN c_bpid          DECIMAL(10,0),
+  c_salesregion_id               FOR COLUMN c_srid          DECIMAL(10,0),
+  paymentrule                    FOR COLUMN payrule         CHAR(1),
+  daysfrom                                                  DECIMAL(10,0) DEFAULT 0,
+  daysto                                                    DECIMAL(10,0) DEFAULT 0,
+  m_product_class_id             FOR COLUMN m_prdclsid      DECIMAL(10,0),
+  m_product_classification_id    FOR COLUMN m_prdcfnid      DECIMAL(10,0),
+  m_product_group_id             FOR COLUMN m_pgrpid        DECIMAL(10,0),
+  c_campaign_id                  FOR COLUMN c_camid         DECIMAL(10,0),
+  c_channel_id                   FOR COLUMN c_chid          DECIMAL(10,0),
+  c_project_id                   FOR COLUMN c_prjid         DECIMAL(10,0),
+  c_paymentterm_id               FOR COLUMN c_ptid          DECIMAL(10,0),
+  invoicecollectiontype          FOR COLUMN invcoltyp       CHAR(1) DEFAULT NULL,
+  c_dunninglevel_id              FOR COLUMN c_dlid          DECIMAL(10,0),
+  ispercentage                   FOR COLUMN ispercnt        CHAR(1) DEFAULT 'N',
+  uuid                                                      VARCHAR(36) DEFAULT NULL,
+  mincompliance                  FOR COLUMN mincompl        DECFLOAT(16),
+  maxcompliance                  FOR COLUMN maxcmp          DECFLOAT(16),
+  maxpercentage                  FOR COLUMN maxpc           DECFLOAT(16),
+  ispercentagefromprice          FOR COLUMN ispcfprc        CHAR(1) DEFAULT 'N',
+  CONSTRAINT c_commissionline_pkey PRIMARY KEY (c_commissionline_id),
+  CONSTRAINT c_commissionline_commissionorders_check CHECK (commissionorders in ('Y','N')),
+  CONSTRAINT c_commissionline_isactive_check CHECK (isactive in ('Y','N')),
+  CONSTRAINT c_commissionline_ispercentage_check CHECK (ispercentage in ('Y','N')),
+  CONSTRAINT c_commissionline_ispercentagefromprice_check CHECK (ispercentagefromprice in ('Y','N')),
+  CONSTRAINT c_commissionline_ispositiveonly_check CHECK (ispositiveonly in ('Y','N'))
+)
+;
+
